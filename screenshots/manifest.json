@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-08-23T08:18:07.330Z",
+  "device": "iPhone 6.9-inch portrait",
+  "actualRenderedGameplay": true,
+  "shots": [
+    {
+      "file": "01-land-fight-survive.png",
+      "title": "Land. Fight. Survive. Evolve.",
+      "width": 1290,
+      "height": 2796
+    },
+    {
+      "file": "02-precision-flight.png",
+      "title": "Master precision flight across neon worlds",
+      "width": 1290,
+      "height": 2796
+    },
+    {
+      "file": "03-ground-combat.png",
+      "title": "Leave the rocket and defend every landing zone",
+      "width": 1290,
+      "height": 2796
+    },
+    {
+      "file": "04-milestone-reward.png",
+      "title": "Earn a new world, boss and upgrade every five landings",
+      "width": 1290,
+      "height": 2796
+    },
+    {
+      "file": "05-aerial-combat.png",
+      "title": "Unlock homing missiles, rail cannons and aerial warfare",
+      "width": 1290,
+      "height": 2796
+    },
+    {
+      "file": "06-quantum-core.png",
+      "title": "Reach the Quantum Core—and survive what comes after",
+      "width": 1290,
+      "height": 2796
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": []
+}

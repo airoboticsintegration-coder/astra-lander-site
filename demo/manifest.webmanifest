@@ -1,0 +1,18 @@
+{
+  "name": "Astra Lander — Free Demo",
+  "short_name": "Astra Demo",
+  "description": "A mobile Lunar Lander-style rocket game with tilt, touch controls, assist modes, fuel options, music, and SFX.",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "portrait-primary",
+  "background_color": "#050814",
+  "theme_color": "#050814",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

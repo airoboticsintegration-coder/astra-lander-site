@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Homing missile weapon reward">
+<defs>
+  <radialGradient id="space" cx="50%" cy="44%" r="75%"><stop offset="0" stop-color="#173a78"/><stop offset=".48" stop-color="#090d2d"/><stop offset="1" stop-color="#03040e"/></radialGradient>
+  <linearGradient id="gold" x1="0" x2="1"><stop stop-color="#fff7a8"/><stop offset=".45" stop-color="#ffd34f"/><stop offset="1" stop-color="#ff7a35"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#9ffcff"/><stop offset=".7" stop-color="#6377c7"/><stop offset="1" stop-color="#dffcff"/></linearGradient>
+  <linearGradient id="flame" x1="1" x2="0"><stop stop-color="#fff7a8"/><stop offset=".4" stop-color="#ff8a38"/><stop offset="1" stop-color="#ff1e8e" stop-opacity="0"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1280" height="720" fill="url(#space)"/>
+<g fill="#fff" opacity=".8"><circle cx="90" cy="86" r="2"/><circle cx="215" cy="170" r="3"/><circle cx="1080" cy="118" r="2"/><circle cx="1175" cy="286" r="3"/><circle cx="968" cy="570" r="2"/><circle cx="310" cy="610" r="2"/><circle cx="510" cy="85" r="2"/></g>
+<circle cx="1030" cy="640" r="250" fill="#0c6b94" opacity=".55"/><circle cx="980" cy="596" r="220" fill="#184b85"/><path d="M760 650 Q920 500 1200 540" fill="none" stroke="#7df9ff" stroke-width="5" opacity=".55"/>
+<g opacity=".25" stroke="url(#gold)" stroke-width="8"><path d="M640 360L640 34"/><path d="M640 360L945 100"/><path d="M640 360L1100 360"/><path d="M640 360L980 650"/><path d="M640 360L310 650"/><path d="M640 360L170 360"/><path d="M640 360L340 90"/></g>
+<g transform="translate(640 354) rotate(-18)" filter="url(#glow)">
+  <path d="M-455 0L-290-45L-290 45Z" fill="url(#flame)"/>
+  <path d="M-255-48L170-48Q265-48 350 0Q265 48 170 48L-255 48Z" fill="url(#metal)" stroke="#dffcff" stroke-width="6"/>
+  <path d="M165-48Q275-44 350 0Q275 44 165 48Q205 0 165-48Z" fill="url(#gold)"/>
+  <path d="M-145-48L-55-132L45-48Z" fill="#21d9ff" stroke="#b9fbff" stroke-width="5"/>
+  <path d="M-145 48L-55 132L45 48Z" fill="#ff2f9a" stroke="#ffa8dc" stroke-width="5"/>
+  <path d="M-245-44L-330-100L-285-25Z" fill="#21d9ff"/><path d="M-245 44L-330 100L-285 25Z" fill="#ff2f9a"/>
+  <circle cx="128" cy="0" r="22" fill="#07152a" stroke="#7df9ff" stroke-width="7"/><circle cx="128" cy="0" r="8" fill="#ff3d91"/>
+</g>
+<g transform="translate(880 275)" fill="none" stroke="#ff3d91" stroke-width="7" filter="url(#glow)"><circle r="76"/><circle r="30"/><path d="M-108 0H-48M48 0H108M0-108V-48M0 48V108"/></g>
+<g transform="translate(640 360)" fill="none" stroke="url(#gold)" stroke-width="8" opacity=".8"><circle r="300" stroke-dasharray="24 24"/><path d="M-340-80L-300-80L-300-150M340 80L300 80L300 150"/></g>
+</svg>

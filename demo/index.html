@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#050814" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Astra Lander" />
+  <title>Astra Lander — Free Demo</title>
+  <link rel="manifest" href="manifest.webmanifest?v=45" />
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="stylesheet" href="styles.css?v=45" />
+</head>
+<body>
+  <canvas id="game" aria-label="Astra Lander game canvas"></canvas>
+
+  <div id="hud" class="hud">
+    <div class="brand"><span class="pulse"></span> ASTRA LANDER <span id="campaignReadout" class="campaignReadout">LUNAR FRONTIER · TIER 0</span><span id="tiltReadout" class="tiltReadout"></span><span id="threatReadout" class="threatReadout"></span></div>
+    <div class="metrics">
+      <span>ALT <b id="altitude">0</b>m</span>
+      <span>VSPD <b id="vspd">0</b></span>
+      <span>HSPD <b id="hspd">0</b></span>
+      <span>FUEL <b id="fuel">100</b></span>
+      <span>LAND <b id="landings">0</b></span>
+      <span>SCORE <b id="score">0</b></span>
+    </div>
+  </div>
+
+  <div id="message" class="message">
+    <h1>Astra Lander</h1>
+    <p>Land, launch, and survive through unlimited sectors. Every five pads changes the music and adds flight hazards. Alien attack rates rise 25% every five seconds you remain grounded.</p>
+    <button id="startBtn">Start Mission</button>
+    <button id="tiltBtn" class="secondary">Enable Tilt</button>
+    <button id="optionsBtn" class="secondary">Options</button>
+    <div id="scoreEntry" class="scoreEntry hidden">
+      <strong>TOP-TEN ONE-TANK RUN!</strong>
+      <label for="pilotName">Pilot name</label>
+      <input id="pilotName" maxlength="16" autocomplete="nickname" placeholder="Enter your name" />
+      <button id="saveScoreBtn">Save Score</button>
+    </div>
+  </div>
+
+  <section id="options" class="panel hidden" aria-label="Game options">
+    <div class="panelHead">
+      <h2>Mission Options</h2>
+      <button id="closeOptions" aria-label="Close mission options">×</button>
+    </div>
+    <div class="grid">
+      <label>Control Mode
+        <select id="controlMode">
+          <option value="touch">On-screen buttons</option>
+          <option value="tilt">Tilt + thrust button</option>
+          <option value="hybrid">Hybrid: tilt + buttons</option>
+          <option value="keyboard">Keyboard/Desktop</option>
+        </select>
+      </label>
+      <label>Auto-correct
+        <select id="assistMode">
+          <option value="off" selected>Off — pure physics</option>
+          <option value="level">Auto-level only</option>
+          <option value="landing">Landing assist</option>
+          <option value="training">Training mode</option>
+        </select>
+      </label>
+      <label>Fuel
+        <select id="fuelMode">
+          <option value="limited">Limited fuel</option>
+          <option value="unlimited">Unlimited fuel</option>
+        </select>
+      </label>
+      <label class="godModeOption">God Mode
+        <input id="godModeToggle" type="checkbox" /> Invincible · unlimited fuel and weapons
+      </label>
+      <label>Difficulty
+        <select id="difficulty">
+          <option value="easy">Easy Moon</option>
+          <option value="normal" selected>Normal</option>
+          <option value="hard">Hard Mars</option>
+          <option value="expert">Expert Europa</option>
+        </select>
+      </label>
+      <label>Graphics
+        <select id="graphicsMode">
+          <option value="ultra" selected>Ultra neon</option>
+          <option value="high">High</option>
+          <option value="battery">Battery saver</option>
+        </select>
+      </label>
+      <label>Music
+        <input id="musicToggle" type="checkbox" checked /> Synth soundtrack
+      </label>
+      <label>SFX
+        <input id="sfxToggle" type="checkbox" checked /> Thrusters / alarms / landing
+      </label>
+      <label>Haptics
+        <input id="hapticsToggle" type="checkbox" checked /> iPhone vibration if available
+      </label>
+      <label>Mission Type
+        <select id="missionType">
+          <option value="single">Single landing</option>
+          <option value="endless" selected>One-tank challenge</option>
+          <option value="time">Time trial</option>
+          <option value="sandbox">Sandbox practice</option>
+        </select>
+      </label>
+      <label>Terrain
+        <select id="terrainStyle">
+          <option value="moon" selected>Moon cliffs</option>
+          <option value="mars">Mars canyon</option>
+          <option value="ice">Icy Europa</option>
+          <option value="alien">Alien crystal field</option>
+        </select>
+      </label>
+    </div>
+    <p class="hint">Tip: Every five landings transforms the world, summons a boss, and awards an upgrade. Flight weapons: B bomb, M homing missile, C cannon after landing 10. On foot: F/X fire, Q/E aim, G grenade.</p>
+  </section>
+
+  <section id="leaderboard" class="panel leaderboard hidden" aria-label="One-tank leaderboard">
+    <div class="panelHead">
+      <h2>🏆 One-Tank Top Ten</h2>
+      <button id="closeLeaderboard" aria-label="Close leaderboard">×</button>
+    </div>
+    <p class="leaderboardHelp">Choose <b>One-tank challenge</b> with limited fuel. Land as many times as possible without refueling.</p>
+    <div id="currentRun" class="currentRun">Current run: 0 landings</div>
+    <ol id="leaderboardList" class="leaderboardList"></ol>
+    <p id="noScores" class="noScores">No scores yet — be the first pilot on the board.</p>
+  </section>
+
+  <section id="rewardPopup" class="rewardPopup hidden" role="dialog" aria-modal="true" aria-labelledby="rewardTitle">
+    <img id="rewardImage" src="assets/reward-05.svg" alt="Astra campaign milestone upgrade" />
+    <div class="rewardCopy">
+      <span id="rewardMilestone">5-LANDING REWARD</span>
+      <h2 id="rewardTitle">HOMING MISSILES UNLOCKED!</h2>
+      <p id="rewardText">Your rocket has been upgraded with three target-seeking missiles.</p>
+      <button id="rewardContinueBtn">ARM MISSILES</button>
+    </div>
+  </section>
+
+  <div id="thrustSelector" class="thrustSelector" aria-label="Engine power">
+    <span>ENGINE</span>
+    <button data-thrust-mode="feather">FEATHER</button>
+    <button data-thrust-mode="vector" class="active">VECTOR</button>
+    <button data-thrust-mode="nova">NOVA</button>
+  </div>
+
+  <button id="exitShipBtn" class="crewAction hidden">EXIT SHIP</button>
+  <div id="pilotStatus" class="pilotStatus hidden">PILOT ♥♥♥</div>
+  <div id="pilotActions" class="pilotActions hidden" aria-label="Pilot actions">
+    <button id="jumpBtn" class="actionControl">JUMP</button>
+    <button id="grenadeBtn" class="actionControl">GRENADE ×3</button>
+    <button id="boardShipBtn">BOARD SHIP</button>
+  </div>
+  <div id="aimControls" class="aimControls hidden" aria-label="Weapon aim">
+    <button id="aimUpBtn" class="actionControl" aria-label="Aim higher">▲</button>
+    <span id="aimReadout">AIM 0°</span>
+    <button id="aimDownBtn" class="actionControl" aria-label="Aim lower">▼</button>
+  </div>
+  <div id="flightWeapons" class="flightWeapons hidden" aria-label="Rocket weapons">
+    <button id="bombBtn" class="actionControl">BOMB ×3</button>
+    <button id="missileBtn" class="actionControl hidden">HOMING ×0</button>
+    <button id="cannonBtn" class="actionControl hidden">CANNON</button>
+  </div>
+
+  <div id="touchControls" class="touchControls">
+    <button id="leftBtn" class="control" aria-label="Rotate counterclockwise">↺</button>
+    <button id="thrustBtn" class="control thrust" aria-label="Apply thrust">THRUST</button>
+    <button id="rightBtn" class="control" aria-label="Rotate clockwise">↻</button>
+  </div>
+
+  <div class="topButtons">
+    <button id="pauseBtn" aria-label="Pause or resume mission">Ⅱ</button>
+    <button id="resetBtn" aria-label="Restart mission">↻</button>
+    <button id="leaderboardBtn" aria-label="Open leaderboard">🏆</button>
+    <button id="gearBtn" aria-label="Open mission options">⚙</button>
+  </div>
+
+  <script>globalThis.ASTRA_DEMO_MODE=true;globalThis.ASTRA_FULL_GAME_URL="";</script>
+  <script src="app.js?v=45"></script>
+</body>
+</html>
